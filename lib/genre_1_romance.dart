@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NewPage extends StatefulWidget {
+class Genre1 extends StatefulWidget {
   @override
-  _NewPageState createState() => _NewPageState();
+  _Genre1State createState() => _Genre1State();
 }
 
-class _NewPageState extends State<NewPage> {
+class _Genre1State extends State<Genre1> {
   final List<String> _movieTitles = [
     'La La Land',
     'Love Happens',
