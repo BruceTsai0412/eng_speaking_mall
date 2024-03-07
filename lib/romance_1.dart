@@ -6,6 +6,24 @@ class NewPage extends StatefulWidget {
 }
 
 class _NewPageState extends State<NewPage> {
+  final List<String> _movieTitles = [
+    'La La Land',
+    'Love Happens',
+    'Titanic',
+    'Movie title 4',
+    'Movie title 5',
+    'Movie title 6',
+  ];
+
+  final List<String> _imagePaths = [
+    'image/pos_la_la_land.png',
+    'image/pos_love_happens.png',
+    'image/pos_titanic.png',
+    'image/pos_la_la_land.png',
+    'image/pos_la_la_land.png',
+    'image/pos_la_la_land.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,44 +34,16 @@ class _NewPageState extends State<NewPage> {
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Align(
-                  alignment: Alignment(-0.9, 0),
-                  child: Text(
-                    'Movies:',
-                    style: const TextStyle(fontSize: 20.0),
-                  ),
-                ),
-              ),
-              const SizedBox.shrink(),
-              Column(
+            children: List.generate(
+              3,
+              (index) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildMovieContainer('Movie title 1', 'image/pos_la_la_land.png'),
-                      buildMovieContainer('Movie title 2', 'image/pos_la_la_land.png'),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildMovieContainer('Movie title 3', 'image/pos_la_la_land.png'),
-                      buildMovieContainer('Movie title 4', 'image/pos_la_la_land.png'),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildMovieContainer('Movie title 5', 'image/pos_la_la_land.png'),
-                      buildMovieContainer('Movie title 6', 'image/pos_la_la_land.png'),
-                    ],
-                  ),
+                  buildMovieContainer(_movieTitles[2 * index], _imagePaths[2 * index]),
+                  buildMovieContainer(_movieTitles[2 * index + 1], _imagePaths[2 * index + 1]),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

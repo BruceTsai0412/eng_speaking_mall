@@ -23,16 +23,16 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final List<String> _genreNames = [
     'Romance',
-    'Action',
+    'Sci-Fi',
     'Comedy',
-    'Drama',
+    'Adventure',
   ];
 
     final List<String> _imagePaths = [
-    'image/pos_love_happens.png',
     'image/pos_la_la_land.png',
-    'image/pos_love_happens.png',
-    'image/pos_love_happens.png',
+    'image/pos_back_to_the_future.png',
+    'image/pos_me_time.png',
+    'image/pos_jumanji.png',
   ];
 
   @override
