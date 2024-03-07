@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'genre_1_scene.dart';
+import 'genre_1_scene_2.dart';
+import 'genre_1_scene_3.dart';
 
 class Genre1 extends StatefulWidget {
   @override
@@ -24,6 +27,12 @@ class _Genre1State extends State<Genre1> {
     'image/pos_la_la_land.png',
   ];
 
+  final List<String> _routes = [
+    '/genre1scene',
+    '/genre1scene2',
+    '/genre1scene3',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +48,8 @@ class _Genre1State extends State<Genre1> {
               (index) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  buildMovieContainer(_movieTitles[2 * index], _imagePaths[2 * index]),
-                  buildMovieContainer(_movieTitles[2 * index + 1], _imagePaths[2 * index + 1]),
+                  buildMovieContainer(_movieTitles[2 * index], _imagePaths[2 * index], index * 2),
+                  buildMovieContainer(_movieTitles[2 * index + 1], _imagePaths[2 * index + 1], index * 2 + 1),
                 ],
               ),
             ),
@@ -50,30 +59,40 @@ class _Genre1State extends State<Genre1> {
     );
   }
 
-  Column buildMovieContainer(String title, String imagePath) {
+  Column buildMovieContainer(String title, String imagePath, int index) {
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Image.asset(
-                imagePath,
-                height: 180.0,  
-                width: 180.0,
-              ),
-              SizedBox(height: 6.0),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 15.0,
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, _routes[index]);
+          },
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Image.asset(
+                  imagePath,
+                  height: 180.0,
+                  width: 180.0,
                 ),
-              ),
-            ],
+                SizedBox(height: 6.0),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15.0,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => _routes[index] == '/genre1scene' ? Genre1Scene() : _routes[index] == '/genre1scene2' ? Genre1Scene2() : Genre1Scene3()),
+            );
+          },
           style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)), 
           child: Text('Select', style: const TextStyle(color: Color(0xffffffff),),),
         ),
