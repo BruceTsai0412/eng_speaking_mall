@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'genre_1_scene.dart';
-import 'genre_1_scene_2.dart';
-import 'genre_1_scene_3.dart';
+import 'genre_1_movie_1.dart';
+import 'genre_1_movie_2.dart';
+import 'genre_1_movie_3.dart';
 
 class Genre1 extends StatefulWidget {
   @override
@@ -31,6 +31,7 @@ class _Genre1State extends State<Genre1> {
     '/genre1scene',
     '/genre1scene2',
     '/genre1scene3',
+    '/videotest',
   ];
 
   @override
@@ -62,39 +63,37 @@ class _Genre1State extends State<Genre1> {
   Column buildMovieContainer(String title, String imagePath, int index) {
     return Column(
       children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, _routes[index]);
-          },
-          child: Container(
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Image.asset(
-                  imagePath,
-                  height: 180.0,
-                  width: 180.0,
+        Container(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Image.asset(
+                imagePath,
+                height: 180.0,
+                width: 180.0,
+              ),
+              SizedBox(height: 6.0),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 15.0,
                 ),
-                SizedBox(height: 6.0),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 15.0,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => _routes[index] == '/genre1scene' ? Genre1Scene() : _routes[index] == '/genre1scene2' ? Genre1Scene2() : Genre1Scene3()),
-            );
-          },
-          style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)), 
-          child: Text('Select', style: const TextStyle(color: Color(0xffffffff),),),
+        SizedBox(
+          height: 35.0,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => _routes[index] == '/genre1scene' ? Genre1Scene() : _routes[index] == '/genre1scene2' ? Genre1Scene2() : Genre1Scene3()),
+              );
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)), 
+            child: Text('Select', style: const TextStyle(color: Color(0xffffffff),),),
+          ),
         ),
       ],
     );
