@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'video_test.dart';
+import 'vid_sub_sync_test.dart';
 
 class Genre1Scene extends StatelessWidget {
   @override

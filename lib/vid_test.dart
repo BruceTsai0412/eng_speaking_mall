@@ -14,7 +14,7 @@ class _VideoTestState extends State<VideoTest> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: 'JodU-FGakG8',
+      initialVideoId: '_z-1fTlSDF0',
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
@@ -25,7 +25,7 @@ class _VideoTestState extends State<VideoTest> {
         }
       });
 
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 60), () {
       if (_controller.value.playerState != PlayerState.ended) {
         _controller.pause();
       }
@@ -52,21 +52,39 @@ class _VideoTestState extends State<VideoTest> {
       appBar: AppBar(
         title: Text('Video Test'),
       ),
-      body: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.amber,
-        progressColors: const ProgressBarColors(
-          playedColor: Colors.amber,
-          handleColor: Colors.amberAccent,
-        ),
-        onReady: () {
-          Future.delayed(Duration(seconds: 5), () {
-            if (_controller.value.playerState != PlayerState.ended) {
-              _controller.pause();
-            }
-          });
-        },
+      backgroundColor: Color(0xffffcd45),
+      body: Column(
+        children: [
+          YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.amber,
+            progressColors: const ProgressBarColors(
+              playedColor: Colors.amber,
+              handleColor: Colors.amberAccent,
+            ),
+            onReady: () {
+              Future.delayed(Duration(seconds: 60), () {
+                if (_controller.value.playerState != PlayerState.ended) {
+                  _controller.pause();
+                }
+              });
+            },
+          ),
+          Container(
+            margin: EdgeInsets.all(8.0),
+            width: 350,
+            height: 400,
+            decoration: BoxDecoration(
+              color: Color(0xfffcf3e3),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.black,
+                width: 1.5,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

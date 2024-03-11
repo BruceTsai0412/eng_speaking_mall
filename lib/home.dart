@@ -41,7 +41,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('home'),
       ),
-      backgroundColor: Color(0xFFFFCD45),
+      backgroundColor: Color(0xffffcd45),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
@@ -77,7 +77,7 @@ class MyHomePage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             color: Colors.black,
-                            width: 2.0,
+                            width: 1.5,
                           ),
                         ),
                         padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
