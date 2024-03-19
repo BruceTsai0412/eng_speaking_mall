@@ -2,22 +2,56 @@ import 'package:flutter/material.dart';
 import 'genre_1_romance.dart';
 
 class Genre extends StatelessWidget {
-  final List<String> genreNames = [
-    'Romance',
-    'Sci-Fi',
-    'Comedy',
-    'Adventure',
+  final List<List<String>> genreNames = const [
+    ['Romance', 'image/pos_la_la_land.png', 'image/pos_la_la_land.png', 'image/pos_la_la_land.png', 'image/pos_la_la_land.png'],
+    ['Sci-Fi', 'image/pos_back_to_the_future.png', 'image/pos_back_to_the_future.png', 'image/pos_back_to_the_future.png', 'image/pos_back_to_the_future.png'],
+    ['Comedy', 'image/pos_me_time.png', 'image/pos_me_time.png', 'image/pos_me_time.png', 'image/pos_me_time.png'],
+    ['Adventure', 'image/pos_jumanji.png', 'image/pos_jumanji.png', 'image/pos_jumanji.png', 'image/pos_jumanji.png'],
   ];
 
-  final List<String> imagePaths = [
-    'image/pos_la_la_land.png',
-    'image/pos_back_to_the_future.png',
-    'image/pos_me_time.png',
-    'image/pos_jumanji.png',
-  ];
+  final String difficulty;
+
+  const Genre({Key? key, required this.difficulty}) : super(key: key);
+
+  List<String> getImagePaths(String difficulty) {
+    switch (difficulty) {
+      case 'Easy':
+        return genreNames[0].sublist(1);
+      case 'Intermediate':
+        return genreNames[1].sublist(1);
+      case 'Hard':
+        return genreNames[2].sublist(1);
+      case 'Phonetics 1':
+        return genreNames[3].sublist(1);
+      case 'Phonetics 2':
+        return genreNames[3].sublist(1);
+      default:
+        return genreNames[0].sublist(1);
+    }
+  }
+
+  List<String> getGenreNames(String difficulty) {
+    switch (difficulty) {
+      case 'Easy':
+        return genreNames[0].sublist(0, 4);
+      case 'Intermediate':
+        return genreNames[1].sublist(0, 4);
+      case 'Hard':
+        return genreNames[2].sublist(0, 4);
+      case 'Phonetics 1':
+        return genreNames[3].sublist(0, 4);
+      case 'Phonetics 2':
+        return genreNames[3].sublist(0, 4);
+      default:
+        return genreNames[0].sublist(0, 4);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final imagePaths = getImagePaths(difficulty);
+    final genreNamesList = getGenreNames(difficulty);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Genre'),
@@ -52,11 +86,11 @@ class Genre extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Row(
+                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              genreNames[index],
+                              genreNamesList[index],
                               style: const TextStyle(fontSize: 20.0, color: Colors.black),
                             ),
                           ],
@@ -102,7 +136,7 @@ class Genre extends StatelessWidget {
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)),
-                                    child: Text('Enter', style: const TextStyle(color: Color(0xffffffff),),),
+child: Text('Enter', style: const TextStyle(color: Color(0xffffffff),),),
                                   ),
                                 ),
                               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'genre.dart';
+import 'genre_test.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 class MyHomePage extends StatelessWidget {
   final List<String> _levels = [
@@ -58,18 +59,18 @@ class MyHomePage extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       child: Align(
                         alignment: Alignment(-0.9, 0),
-                        child: Text('Select a level', style: const TextStyle(fontSize: 20.0),),),
+                        child: Text('Select a level', style: TextStyle(fontSize: 20.0),),),
                     ),
                     ...List.generate(
                       5,
                       (index) => InkWell(
-                        onTap:() {
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Genre(difficulty: _levels[index]),
+                              builder: (context) => Genre_test(difficulty: _levels[index]),
                             ),
-                          ); 
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -86,7 +87,7 @@ class MyHomePage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       _levels[index],
