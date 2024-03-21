@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'data/genre_names.dart';
 import 'genre_1_romance.dart';
 
+
 class Genre extends StatelessWidget {
-  final List<List<String>> genreNames = const [
-    ['Romance', 'image/pos_la_la_land.png', 'image/pos_la_la_land.png', 'image/pos_la_la_land.png', 'image/pos_la_la_land.png'],
-    ['Sci-Fi', 'image/pos_back_to_the_future.png', 'image/pos_back_to_the_future.png', 'image/pos_back_to_the_future.png', 'image/pos_back_to_the_future.png'],
-    ['Comedy', 'image/pos_me_time.png', 'image/pos_me_time.png', 'image/pos_me_time.png', 'image/pos_me_time.png'],
-    ['Adventure', 'image/pos_jumanji.png', 'image/pos_jumanji.png', 'image/pos_jumanji.png', 'image/pos_jumanji.png'],
-  ];
+  // final List<List<String>> genreNames = const [
+  //   ['Romance', 'Sci-Fi', 'Comedy', 'Adventure', 'Biographies', 'image/pos_la_la_land.png', 'image/pos_back_to_the_future.png', 'image/pos_me_time.png', 'image/pos_jumanji.png', 'image/pos_long_walk_to_freedom.png'],
+  //   ['Romance', 'Sci-Fi', 'Comedy', 'Adventure', 'Biographies', 'image/pos_la_la_land.png', 'image/pos_back_to_the_future.png', 'image/pos_me_time.png', 'image/pos_jumanji.png'],
+  //   ['Romance', 'Sci-Fi', 'Comedy', 'Adventure', 'Biographies', 'image/pos_la_la_land.png', 'image/pos_back_to_the_future.png', 'image/pos_me_time.png', 'image/pos_jumanji.png'],
+  //   ['Romance', 'Sci-Fi', 'Comedy', 'Adventure', 'Biographies', 'image/pos_la_la_land.png', 'image/pos_back_to_the_future.png', 'image/pos_me_time.png', 'image/pos_jumanji.png'],
+  //   ['Romance', 'Sci-Fi', 'Comedy', 'Adventure', 'Biographies', 'image/pos_la_la_land.png', 'image/pos_back_to_the_future.png', 'image/pos_me_time.png', 'image/pos_jumanji.png'],
+  // ];
 
   final String difficulty;
 
@@ -16,34 +19,34 @@ class Genre extends StatelessWidget {
   List<String> getImagePaths(String difficulty) {
     switch (difficulty) {
       case 'Easy':
-        return genreNames[0].sublist(1);
+        return genreNames[0].sublist(5);
       case 'Intermediate':
-        return genreNames[1].sublist(1);
+        return genreNames[1].sublist(4);
       case 'Hard':
-        return genreNames[2].sublist(1);
+        return genreNames[2].sublist(4);
       case 'Phonetics 1':
-        return genreNames[3].sublist(1);
+        return genreNames[3].sublist(4);
       case 'Phonetics 2':
-        return genreNames[3].sublist(1);
+        return genreNames[4].sublist(4);
       default:
-        return genreNames[0].sublist(1);
+        return genreNames[0].sublist(4);
     }
   }
 
   List<String> getGenreNames(String difficulty) {
     switch (difficulty) {
       case 'Easy':
-        return genreNames[0].sublist(0, 4);
+        return genreNames[0].sublist(0, 5);
       case 'Intermediate':
-        return genreNames[1].sublist(0, 4);
+        return genreNames[1].sublist(0, 5);
       case 'Hard':
-        return genreNames[2].sublist(0, 4);
+        return genreNames[2].sublist(0, 5);
       case 'Phonetics 1':
-        return genreNames[3].sublist(0, 4);
+        return genreNames[3].sublist(0, 5);
       case 'Phonetics 2':
-        return genreNames[3].sublist(0, 4);
+        return genreNames[4].sublist(0, 5);
       default:
-        return genreNames[0].sublist(0, 4);
+        return genreNames[0].sublist(0, 5);
     }
   }
 
@@ -70,7 +73,7 @@ class Genre extends StatelessWidget {
                 ),
               ),
               ...List.generate(
-                4,
+                5,
                 (index) => Container(
                   decoration: BoxDecoration(
                     color: const Color(0xfffcf3e3),
@@ -116,7 +119,7 @@ class Genre extends StatelessWidget {
                                     color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset: Offset(0, 3), // changes position of shadow
+                                    offset: Offset(0, 3),
                                   ),
                                 ],
                               ),
@@ -136,7 +139,7 @@ class Genre extends StatelessWidget {
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)),
-child: Text('Enter', style: const TextStyle(color: Color(0xffffffff),),),
+                                    child: Text('Enter', style: const TextStyle(color: Color(0xffffffff),),),
                                   ),
                                 ),
                               ),
