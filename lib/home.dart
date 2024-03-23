@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'genre.dart';
+import 'select_genre.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,7 +67,7 @@ class MyHomePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Genre(difficulty: _levels[index]),
+                              builder: (context) => selectGenre(difficulty: _levels[index]),
                             ),
                           ); 
                         },
