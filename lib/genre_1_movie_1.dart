@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'vid_test2.0.dart';
+import 'vid_test copy.dart';
 
 class Genre1Scene extends StatelessWidget {
   @override
@@ -33,7 +33,7 @@ class Genre1Scene extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VideoTest2()),
+                    MaterialPageRoute(builder: (context) => VideoTestCopy()),
                   );
                 },
                 child: Container(
