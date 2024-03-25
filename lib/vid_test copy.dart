@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter_sound/flutter_sound.dart' as flutterSound;
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class VideoTestCopy extends StatefulWidget {
   @override
@@ -15,8 +16,8 @@ class _VideoTestState extends State<VideoTestCopy> {
   YoutubePlayerValue? _playerValue;
   late flutterSound.FlutterSoundRecorder _audioRecorder;
 
-  // Path for the recorded audio file
-  String _recordingFilePath = '';
+  String? _recordingFilePath;
+  bool _isRecording = false;
 
   @override
   void initState() {
@@ -28,10 +29,10 @@ class _VideoTestState extends State<VideoTestCopy> {
         mute: false,
       ),
     )..addListener(() {
-      if (_controller.value.playerState == PlayerState.ended) {
-        _controller.seekTo(Duration.zero);
-      }
-    });
+        if (_controller.value.playerState == PlayerState.ended) {
+          _controller.seekTo(Duration.zero);
+        }
+      });
 
     _controller.addListener(() {
       setState(() {
@@ -45,26 +46,17 @@ class _VideoTestState extends State<VideoTestCopy> {
     });
 
     // Initialize the recording file path
-    _getRecordingFilePath();
+    _getRecordingFilePath().then((path) {
+      _recordingFilePath = path;
+    });
   }
 
-    Future<void> _recordAudio() async {
-    if (_audioRecorder.isRecording) {
-      await _audioRecorder.stopRecorder();
-    } else {
-      String filePath = await _getRecordFilePath();
-      await _audioRecorder.startRecorder(toFile: filePath);
-    }
-
-    setState(() {});
-  }
-
-  Future<String> _getRecordFilePath() async {
+  Future<String> _getRecordingFilePath() async {
     Directory appDirectory = await getApplicationDocumentsDirectory();
     String appDocPath = appDirectory.path;
     Directory audioDirectory = Directory('$appDocPath/audio');
     if (!audioDirectory.existsSync()) {
-      audioDirectory.createSync();
+      audioDirectory.createSync(recursive: true);
     }
     return '${audioDirectory.path}/audio.aac';
   }
@@ -104,7 +96,7 @@ class _VideoTestState extends State<VideoTestCopy> {
             margin: EdgeInsets.all(8.0),
             child: IconButton(
               color: Colors.black,
-              icon: Icon(_audioRecorder.isRecording ? Icons.stop : Icons.mic),
+              icon: Icon(_isRecording ? Icons.stop : Icons.mic),
               onPressed: _recordAudio,
             ),
             decoration: BoxDecoration(
@@ -112,15 +104,52 @@ class _VideoTestState extends State<VideoTestCopy> {
               color: Colors.white,
             ),
           ),
+          if (_recordingFilePath != null)
+            Text(_recordingFilePath!),
+
         ],
       ),
     );
   }
 
+  Future<void> _recordAudio() async {
+    var status = await Permission.microphone.status;
+    if (status != PermissionStatus.granted) {
+      status = await Permission.microphone.request();
+      if (status != PermissionStatus.granted) {
+        print('Microphone permission not granted');
+        return;
+      }
+    }
+
+    if (_isRecording) {
+      try {
+        await _audioRecorder.stopRecorder();
+      } catch (e) {
+        print('Error stopping recorder: $e');
+      }
+    } else {
+      try {
+        String filePath = await _getRecordingFilePath();
+        await _audioRecorder.startRecorder(toFile: filePath);
+        setState(() {
+          _recordingFilePath = filePath;
+          _isRecording = true;
+        });
+      } catch (e) {
+        print('Error starting recorder: $e');
+      }
+    }
+
+    setState(() {
+      _isRecording = !_isRecording;
+    });
+  }
+
   @override
-  void dispose() {
-    _audioRecorder.closeRecorder();
+void dispose() {
     _controller.dispose();
+    _audioRecorder.closeRecorder();
     super.dispose();
   }
 }
