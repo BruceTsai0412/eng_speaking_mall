@@ -182,7 +182,7 @@ class _VideoTestState extends State<Recorder2> {
     await _speech.listen(
       onResult: (result) {
         setState(() {
-          _transcription = result.recognizedWords!;
+          _transcription = result.recognizedWords;
         });
       },
     );
