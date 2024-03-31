@@ -30,10 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   youtube_player_flutter: ^8.1.2
   flutter_sound: ^9.4.6
   permission_handler: ^11.3.0
+  path_provider: ^2.0.2
+  speech_to_text: ^6.6.1
   # flutter_screenutil: ^5.4.2
 
 
