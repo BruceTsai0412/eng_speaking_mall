@@ -7,12 +7,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Recorder2 extends StatefulWidget {
+class Recorder4 extends StatefulWidget {
   @override
   _VideoTestState createState() => _VideoTestState();
 }
 
-class _VideoTestState extends State<Recorder2> {
+class _VideoTestState extends State<Recorder4> {
   late YoutubePlayerController _controller;
   YoutubePlayerValue? _playerValue;
   late flutterSound.FlutterSoundRecorder _audioRecorder;
@@ -20,7 +20,12 @@ class _VideoTestState extends State<Recorder2> {
   late stt.SpeechToText _speech;
   String _transcription = '';
   bool _isRecording = false;
+  bool _isRecordingInitialzed = false;
   bool _isPlaying = false;
+  bool _isTranscribing = false;
+  List<String> _recordingFilePaths = [];
+  int _currentIndex = 0;
+  String? _playbackFilePath;
 
   @override
   void initState() {
@@ -50,11 +55,30 @@ class _VideoTestState extends State<Recorder2> {
     _initializeRecorder();
     _initializePlayer();
 
-    _getRecordingFilePath().then((path) {
-      _recordingFilePath = path;
+    _getRecordingFilePaths().then((paths) {
+      setState(() {
+        _recordingFilePaths = paths;
+        _currentIndex = _recordingFilePaths.length - 1;
+      });
     });
 
     _startListening();
+  }
+
+  Future<List<String>> _getRecordingFilePaths() async {
+    Directory appDirectory = await getApplicationDocumentsDirectory();
+    String appDocPath = appDirectory.path;
+    Directory audioDirectory = Directory('$appDocPath/audio');
+    if (!audioDirectory.existsSync()) {
+      audioDirectory.createSync(recursive: true);
+    }
+    List<String> filePaths = [];
+    audioDirectory.listSync().forEach((file) {
+      if (file is File && file.path.endsWith('.aac')) {
+        filePaths.add(file.path);
+      }
+    });
+    return filePaths;
   }
 
   Future<void> _initializeRecorder() async {
@@ -74,10 +98,12 @@ class _VideoTestState extends State<Recorder2> {
     if (!audioDirectory.existsSync()) {
       audioDirectory.createSync(recursive: true);
     }
-    return '${audioDirectory.path}/audio.aac';
+    String filePath = '${audioDirectory.path}/audio${_recordingFilePaths.length + 1}.aac';
+    _recordingFilePaths.add(filePath);
+    return filePath;
   }
 
-  Future<String> _getPlaybackFilePath() async {
+ Future<String> _getPlaybackFilePath() async {
     Directory appDirectory = await getApplicationDocumentsDirectory();
     String appDocPath = appDirectory.path;
     Directory audioDirectory = Directory('$appDocPath/audio');
@@ -87,10 +113,16 @@ class _VideoTestState extends State<Recorder2> {
     return '${audioDirectory.path}/audio_playback.aac';
   }
 
-  String? _recordingFilePath;
-  String? _playbackFilePath;
-
   Future<void> _recordAudio() async {
+    if (_recordingFilePaths.length >= 5) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Maximum number of recordings reached'),
+        ),
+      );
+      return;
+    }
+
     var status = await Permission.microphone.status;
     if (status != PermissionStatus.granted) {
       status = await Permission.microphone.request();
@@ -100,15 +132,20 @@ class _VideoTestState extends State<Recorder2> {
       }
     }
 
+    if (!_isRecordingInitialzed) {
+      await _speech.initialize();
+      _isRecordingInitialzed = true;
+    }
+
     if (_isRecording) {
       try {
         await _audioRecorder.stopRecorder();
-        _playbackFilePath = _recordingFilePath;
+        _playbackFilePath = _recordingFilePaths[_currentIndex];
         _stopListening();
         setState(() {
           _isRecording = false;
           _transcription = '';
-       });
+        });
       } catch (e) {
         print('Error stopping recorder: $e');
       }
@@ -120,8 +157,8 @@ class _VideoTestState extends State<Recorder2> {
           codec: flutterSound.Codec.aacADTS,
         );
         setState(() {
-          _recordingFilePath = filePath;
           _isRecording = true;
+          _currentIndex = _recordingFilePaths.length - 1;
         });
         _startListening();
       } catch (e) {
@@ -164,10 +201,14 @@ class _VideoTestState extends State<Recorder2> {
         _playbackFilePath = null;
         _isPlaying = false;
       });
-      await _deleteFile(_playbackFilePath);
-      await _getRecordingFilePath().then((path) {
-        _recordingFilePath = path;
-      });
+      if (_recordingFilePaths.isNotEmpty) {
+        String lastFilePath = _recordingFilePaths.removeLast();
+        await _deleteFile(lastFilePath);
+        if (_currentIndex >= _recordingFilePaths.length) {
+          _currentIndex--;
+        }
+        _playbackFilePath = _recordingFilePaths.isNotEmpty ? _recordingFilePaths.last : null;
+      }
       _stopListening();
       setState(() {
         _transcription = '';
@@ -178,7 +219,6 @@ class _VideoTestState extends State<Recorder2> {
   }
 
   Future<void> _startListening() async {
-    await _speech.initialize();
     await _speech.listen(
       onResult: (result) {
         setState(() {
@@ -186,12 +226,16 @@ class _VideoTestState extends State<Recorder2> {
         });
       },
     );
+    setState(() {
+      _isTranscribing = true;
+    });
   }
 
   Future<void> _stopListening() async {
     await _speech.stop();
     setState(() {
       _transcription = '';
+_isTranscribing = false;
     });
   }
 
@@ -205,7 +249,7 @@ class _VideoTestState extends State<Recorder2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Test'),
+        title: Text('Rec4'),
       ),
       backgroundColor: Color(0xffffcd45),
       body: SingleChildScrollView(
@@ -236,32 +280,63 @@ class _VideoTestState extends State<Recorder2> {
                     children: [
                       IconButton(
                         color: Colors.black,
-                        icon: Icon(_isRecording ? Icons.stop : Icons.mic),
+                        icon: Icon(_isRecording
+                            ? Icons.stop
+                            : Icons.mic),
                         onPressed: _recordAudio,
                       ),
                       IconButton(
                         color: Colors.black,
-                        icon:
-                            Icon(_isPlaying ? Icons.pause : Icons.play_arrow),onPressed: _playbackFilePath != null
+                        icon: Icon(_isPlaying
+                            ? Icons.pause
+                            : Icons.play_arrow),
+                        onPressed: _playbackFilePath !=
+                            null
                             ? _playAudio
                             : null,
                       ),
                       IconButton(
                         color: Colors.black,
+                        icon: Icon(_isTranscribing
+                            ? Icons.stop
+                            : Icons.transcribe),
+                        onPressed: _isTranscribing
+                            ? _stopListening
+                            : _startListening,
+                      ),
+                      IconButton(
+                        color: Colors.black,
                         icon: Icon(Icons.delete),
-                        onPressed: _playbackFilePath != null
+                        onPressed: _playbackFilePath !=
+                            null
                             ? _undo
                             : null,
                       ),
-                    ],
-                  ),
-                  Center(
-                    child: SingleChildScrollView(
-                      child: Text(
-                        _transcription,
-                        textAlign: TextAlign.center,
+                      IconButton(
+                        color: Colors.black,
+                        icon: Icon(Icons.arrow_back),
+                        onPressed: _currentIndex > 0
+                            ? () {
+                                setState(() {
+                                  _currentIndex--;
+                                  _playbackFilePath = _recordingFilePaths[_currentIndex];
+                                });
+                              }
+                            : null,
                       ),
-                    ),
+                      IconButton(
+                        color: Colors.black,
+                        icon: Icon(Icons.arrow_forward),
+                        onPressed: _currentIndex < _recordingFilePaths.length - 1
+                            ? () {
+                                setState(() {
+                                  _currentIndex++;
+                                  _playbackFilePath = _recordingFilePaths[_currentIndex];
+                                });
+                              }
+                            : null,
+                      ),
+                    ],
                   ),
                   Container(
                     margin: EdgeInsets.all(8.0),
@@ -279,8 +354,7 @@ class _VideoTestState extends State<Recorder2> {
                 ],
               ),
             ),
-            if (_recordingFilePath != null)
-              Text(_recordingFilePath!),
+            ..._recordingFilePaths.map((path) => Text(path)),
             if (_playbackFilePath != null)
               Text(_playbackFilePath!),
           ],
@@ -291,7 +365,7 @@ class _VideoTestState extends State<Recorder2> {
 
   @override
   void dispose() {
-    _controller.dispose();
+   _controller.dispose();
     _audioRecorder.closeRecorder();
     _audioPlayer.closePlayer();
     _speech.stop();
