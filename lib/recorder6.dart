@@ -7,12 +7,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Recorder4 extends StatefulWidget {
+class Recorder6 extends StatefulWidget {
   @override
   _VideoTestState createState() => _VideoTestState();
 }
 
-class _VideoTestState extends State<Recorder4> {
+class _VideoTestState extends State<Recorder6> {
   late YoutubePlayerController _controller;
   YoutubePlayerValue? _playerValue;
   late flutterSound.FlutterSoundRecorder _audioRecorder;
@@ -124,9 +124,9 @@ class _VideoTestState extends State<Recorder4> {
     }
 
     var status = await Permission.microphone.status;
-    if (status != PermissionStatus.granted) {
+    if (status!= PermissionStatus.granted) {
       status = await Permission.microphone.request();
-      if (status != PermissionStatus.granted) {
+      if (status!= PermissionStatus.granted) {
         print('Microphone permission not granted');
         return;
       }
@@ -145,6 +145,7 @@ class _VideoTestState extends State<Recorder4> {
         setState(() {
           _isRecording = false;
           _transcription = '';
+          _isTranscribing = false;
         });
       } catch (e) {
         print('Error stopping recorder: $e');
@@ -158,9 +159,10 @@ class _VideoTestState extends State<Recorder4> {
         );
         setState(() {
           _isRecording = true;
+          _isTranscribing = true;
           _currentIndex = _recordingFilePaths.length - 1;
         });
-        _startListening();
+        _startListening(); // Start listening for speech input
       } catch (e) {
         print('Error starting recorder: $e');
       }
@@ -235,7 +237,8 @@ class _VideoTestState extends State<Recorder4> {
     await _speech.stop();
     setState(() {
       _transcription = '';
-_isTranscribing = false;
+      _isTranscribing = false;
+      _audioRecorder.stopRecorder();
     });
   }
 
@@ -249,7 +252,7 @@ _isTranscribing = false;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rec4'),
+        title: Text('Rec6'),
       ),
       backgroundColor: Color(0xffffcd45),
       body: SingleChildScrollView(
@@ -280,10 +283,15 @@ _isTranscribing = false;
                     children: [
                       IconButton(
                         color: Colors.black,
-                        icon: Icon(_isRecording
-                            ? Icons.stop
-                            : Icons.mic),
-                        onPressed: _recordAudio,
+                        icon: Icon(_isRecording ? Icons.stop : Icons.mic),
+                        onPressed: () {
+                          if (_isTranscribing) {
+                            _stopListening();
+                          } else {
+                            _recordAudio();
+                            _startListening();
+                          }
+                        },
                       ),
                       IconButton(
                         color: Colors.black,
@@ -294,15 +302,6 @@ _isTranscribing = false;
                             null
                             ? _playAudio
                             : null,
-                      ),
-                      IconButton(
-                        color: Colors.black,
-                        icon: Icon(_isTranscribing
-                            ? Icons.stop
-                            : Icons.transcribe),
-                        onPressed: _isTranscribing
-                            ? _stopListening
-                            : _startListening,
                       ),
                       IconButton(
                         color: Colors.black,

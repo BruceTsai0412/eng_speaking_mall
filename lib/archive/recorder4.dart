@@ -7,12 +7,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Recorder5 extends StatefulWidget {
+class Recorder4 extends StatefulWidget {
   @override
   _VideoTestState createState() => _VideoTestState();
 }
 
-class _VideoTestState extends State<Recorder5> {
+class _VideoTestState extends State<Recorder4> {
   late YoutubePlayerController _controller;
   YoutubePlayerValue? _playerValue;
   late flutterSound.FlutterSoundRecorder _audioRecorder;
@@ -145,7 +145,6 @@ class _VideoTestState extends State<Recorder5> {
         setState(() {
           _isRecording = false;
           _transcription = '';
-          _isTranscribing = false;
         });
       } catch (e) {
         print('Error stopping recorder: $e');
@@ -159,7 +158,6 @@ class _VideoTestState extends State<Recorder5> {
         );
         setState(() {
           _isRecording = true;
-          _isTranscribing = true;
           _currentIndex = _recordingFilePaths.length - 1;
         });
         _startListening();
@@ -167,7 +165,7 @@ class _VideoTestState extends State<Recorder5> {
         print('Error starting recorder: $e');
       }
     }
-}
+  }
 
   Future<void> _playAudio() async {
     if (_playbackFilePath != null) {
@@ -251,7 +249,7 @@ class _VideoTestState extends State<Recorder5> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rec5'),
+        title: Text('Rec4'),
       ),
       backgroundColor: Color(0xffffcd45),
       body: SingleChildScrollView(
