@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'recorder5.dart';
-import 'practice.dart';
+
+
 
 void main() {
   runApp(MyApp());
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Recorder App'),
       ),
-      body: Practice(),
+      // body: Recorder5(),
     );
   }
 }

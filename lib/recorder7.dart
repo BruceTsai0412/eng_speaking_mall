@@ -1,28 +1,24 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_sound/flutter_sound.dart' as flutterSound;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Recorder6 extends StatefulWidget {
+class Recorder7 extends StatefulWidget {
   @override
   _VideoTestState createState() => _VideoTestState();
 }
 
-class _VideoTestState extends State<Recorder6> {
+class _VideoTestState extends State<Recorder7> {
   late YoutubePlayerController _controller;
   YoutubePlayerValue? _playerValue;
   late flutterSound.FlutterSoundRecorder _audioRecorder;
   late flutterSound.FlutterSoundPlayer _audioPlayer;
-  late stt.SpeechToText _speech;
-  String _transcription = '';
   bool _isRecording = false;
   bool _isRecordingInitialzed = false;
   bool _isPlaying = false;
-  bool _isTranscribing = false;
   List<String> _recordingFilePaths = [];
   int _currentIndex = 0;
   String? _playbackFilePath;
@@ -50,7 +46,6 @@ class _VideoTestState extends State<Recorder6> {
 
     _audioRecorder = flutterSound.FlutterSoundRecorder();
     _audioPlayer = flutterSound.FlutterSoundPlayer();
-    _speech = stt.SpeechToText();
 
     _initializeRecorder();
     _initializePlayer();
@@ -61,8 +56,6 @@ class _VideoTestState extends State<Recorder6> {
         _currentIndex = _recordingFilePaths.length - 1;
       });
     });
-
-    _startListening();
   }
 
   Future<List<String>> _getRecordingFilePaths() async {
@@ -103,7 +96,7 @@ class _VideoTestState extends State<Recorder6> {
     return filePath;
   }
 
- Future<String> _getPlaybackFilePath() async {
+  Future<String> _getPlaybackFilePath() async {
     Directory appDirectory = await getApplicationDocumentsDirectory();
     String appDocPath = appDirectory.path;
     Directory audioDirectory = Directory('$appDocPath/audio');
@@ -124,28 +117,26 @@ class _VideoTestState extends State<Recorder6> {
     }
 
     var status = await Permission.microphone.status;
-    if (status!= PermissionStatus.granted) {
+    if (status != PermissionStatus.granted) {
       status = await Permission.microphone.request();
-      if (status!= PermissionStatus.granted) {
+      if (status != PermissionStatus.granted) {
         print('Microphone permission not granted');
         return;
       }
     }
 
     if (!_isRecordingInitialzed) {
-      await _speech.initialize();
+      // Initialize the audio recorder here if necessary
+
       _isRecordingInitialzed = true;
     }
 
     if (_isRecording) {
       try {
         await _audioRecorder.stopRecorder();
-        _playbackFilePath = _recordingFilePaths[_currentIndex];
-        _stopListening();
+
         setState(() {
           _isRecording = false;
-          _transcription = '';
-          _isTranscribing = false;
         });
       } catch (e) {
         print('Error stopping recorder: $e');
@@ -157,12 +148,11 @@ class _VideoTestState extends State<Recorder6> {
           toFile: filePath,
           codec: flutterSound.Codec.aacADTS,
         );
+
         setState(() {
           _isRecording = true;
-          _isTranscribing = true;
           _currentIndex = _recordingFilePaths.length - 1;
         });
-        _startListening(); // Start listening for speech input
       } catch (e) {
         print('Error starting recorder: $e');
       }
@@ -176,6 +166,7 @@ class _VideoTestState extends State<Recorder6> {
           fromURI: _playbackFilePath!,
           codec: flutterSound.Codec.aacADTS,
         );
+
         setState(() {
           _isPlaying = true;
         });
@@ -188,6 +179,7 @@ class _VideoTestState extends State<Recorder6> {
   Future<void> _stopAudio() async {
     try {
       await _audioPlayer.stopPlayer();
+
       setState(() {
         _isPlaying = false;
       });
@@ -199,51 +191,24 @@ class _VideoTestState extends State<Recorder6> {
   Future<void> _undo() async {
     try {
       await _audioPlayer.stopPlayer();
-      setState(() {
-        _playbackFilePath = null;
-        _isPlaying = false;
-      });
-      if (_recordingFilePaths.isNotEmpty) {
-        String lastFilePath = _recordingFilePaths.removeLast();
-        await _deleteFile(lastFilePath);
-        if (_currentIndex >= _recordingFilePaths.length) {
-          _currentIndex--;
-        }
-        _playbackFilePath = _recordingFilePaths.isNotEmpty ? _recordingFilePaths.last : null;
+
+      String lastFilePath = _recordingFilePaths.removeLast();
+      await _deleteFile(lastFilePath);
+
+      if (_currentIndex >= _recordingFilePaths.length) {
+        _currentIndex--;
       }
-      _stopListening();
-      setState(() {
-        _transcription = '';
-      });
+
+      _playbackFilePath = _recordingFilePaths.isNotEmpty ? _recordingFilePaths.last : null;
+
+      setState(() {});
     } catch (e) {
       print('Error undoing recording: $e');
     }
   }
 
-  Future<void> _startListening() async {
-    await _speech.listen(
-      onResult: (result) {
-        setState(() {
-          _transcription = result.recognizedWords;
-        });
-      },
-    );
-    setState(() {
-      _isTranscribing = true;
-    });
-  }
-
-  Future<void> _stopListening() async {
-    await _speech.stop();
-    setState(() {
-      _transcription = '';
-      _isTranscribing = false;
-      _audioRecorder.stopRecorder();
-    });
-  }
-
-  Future<void> _deleteFile(String? filePath) async {
-    if (filePath != null && File(filePath).existsSync()) {
+  Future<void> _deleteFile(String filePath) async {
+    if (File(filePath).existsSync()) {
       await File(filePath).delete();
     }
   }
@@ -252,7 +217,7 @@ class _VideoTestState extends State<Recorder6> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rec6'),
+        title: Text('Rec7'),
       ),
       backgroundColor: Color(0xffffcd45),
       body: SingleChildScrollView(
@@ -283,15 +248,10 @@ class _VideoTestState extends State<Recorder6> {
                     children: [
                       IconButton(
                         color: Colors.black,
-                        icon: Icon(_isRecording ? Icons.stop : Icons.mic),
-                        onPressed: () {
-                          if (_isTranscribing) {
-                            _stopListening();
-                          } else {
-                            _recordAudio();
-                            _startListening();
-                          }
-                        },
+                        icon: Icon(_isRecording
+                            ? Icons.stop
+                            : Icons.mic),
+                        onPressed: _recordAudio,
                       ),
                       IconButton(
                         color: Colors.black,
@@ -339,16 +299,8 @@ class _VideoTestState extends State<Recorder6> {
                   ),
                   Container(
                     margin: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text('Speech-to-Text Output:'),
-                        Text(
-                          _transcription,
-                          maxLines: null,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                    child: Text(_playbackFilePath??
+                      "No recording selected"),
                   ),
                 ],
               ),
@@ -364,11 +316,9 @@ class _VideoTestState extends State<Recorder6> {
 
   @override
   void dispose() {
-   _controller.dispose();
+    _controller.dispose();
     _audioRecorder.closeRecorder();
     _audioPlayer.closePlayer();
-    _speech.stop();
-    _speech.cancel();
     super.dispose();
   }
 }

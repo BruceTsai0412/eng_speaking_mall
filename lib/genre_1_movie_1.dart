@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_speak_app/archive/recorder2.dart';
-import 'package:learn_speak_app/vid_test%20copy.dart';
-import 'archive/recorder4.dart';
+import 'practice.dart';
 
 class Genre1Scene extends StatelessWidget {
   @override
@@ -35,7 +33,7 @@ class Genre1Scene extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Recorder4()),
+                    MaterialPageRoute(builder: (context) => Practice()),
                   );
                 },
                 child: Container(
