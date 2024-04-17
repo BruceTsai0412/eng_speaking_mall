@@ -17,22 +17,18 @@
                 'Love Happens',
                 'Titanic',
                 'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
               ],
               [
                 'image/pos_la_la_land.png',
                 'image/pos_love_happens.png',
                 'image/pos_titanic.png',
                 'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
               ],
               [
                 '/genre1scene',
                 '/genre1scene2',
                 '/genre1scene3',
-                '/videotest',
+                '/genre1scene',
               ],
             );
           case 'Sci-Fi':
@@ -42,15 +38,11 @@
                 'Love Happens',
                 'Titanic',
                 'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
               ],
               [
                 'image/pos_la_la_land.png',
                 'image/pos_love_happens.png',
                 'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
                 'image/pos_la_la_land.png',
               ],
               [
@@ -327,15 +319,11 @@
                 'Love Happens',
                 'Titanic',
                 'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
               ],
               [
                 'image/pos_la_la_land.png',
                 'image/pos_love_happens.png',
                 'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
                 'image/pos_la_la_land.png',
               ],
               [
@@ -352,15 +340,11 @@
                 'Love Happens',
                 'Titanic',
                 'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
               ],
               [
                 'image/pos_la_la_land.png',
                 'image/pos_love_happens.png',
                 'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
                 'image/pos_la_la_land.png',
               ],
               [
@@ -377,275 +361,11 @@
                 'Love Happens',
                 'Titanic',
                 'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
               ],
               [
                 'image/pos_la_la_land.png',
                 'image/pos_love_happens.png',
                 'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-          default:
-            throw Exception('Invalid genre: $genre');
-        }
-      case 'Phonetics 1':
-        switch (genre) {
-          case 'Romance':
-            return GenreData(
-              [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-          case 'Sci-Fi':
-            return GenreData(
-              [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-          case 'Comedy':
-            return GenreData(
-            [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-            case 'Adventure':
-            return GenreData(
-            [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-            case 'Biographies':
-            return GenreData(
-            [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-          default:
-            throw Exception('Invalid genre: $genre');
-        }
-      case 'Phonetics 2':
-        switch (genre) {
-          case 'Romance':
-            return GenreData(
-              [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-          case 'Sci-Fi':
-            return GenreData(
-              [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-          case 'Comedy':
-            return GenreData(
-            [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-            case 'Adventure':
-            return GenreData(
-            [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
-              ],
-              [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/videotest',
-              ],
-            );
-            case 'Biographies':
-            return GenreData(
-            [
-                'La La Land',
-                'Love Happens',
-                'Titanic',
-                'Movie title 4',
-                'Movie title 5',
-                'Movie title 6',
-              ],
-              [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
-                'image/pos_titanic.png',
-                'image/pos_la_la_land.png',
-                'image/pos_la_la_land.png',
                 'image/pos_la_la_land.png',
               ],
               [

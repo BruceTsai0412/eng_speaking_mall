@@ -305,6 +305,24 @@ class _VideoTestState extends State<Recorder7> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed callback here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 38, 131, 50),
+                    padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                  ),
+                  child: Text(
+                    'Play!',
+                    style: const TextStyle(fontSize: 18, color: Color(0xffffffff)),
+                  ),
+                ),
+              ],
+            ),
             ..._recordingFilePaths.map((path) => Text(path)),
             if (_playbackFilePath != null)
               Text(_playbackFilePath!),

@@ -1,10 +1,43 @@
 import 'package:flutter/material.dart';
-import 'data/genre_names.dart';
 import 'genre_1.dart';
 
+final List<String> genreDifficultyEasy = [
+  'Romance',
+  'Sci-Fi',
+  'Adventure',
+];
+
+final List<String> genreImagesEasy = [
+  'image/pos_la_la_land.png',
+  'image/pos_back_to_the_future.png',
+  'image/pos_jumanji.png',
+];
+
+final List<String> genreDifficultyIntermediate = [
+  'Sci-Fi',
+  'Comedy',
+  'Adventure',
+];
+
+final List<String> genreImagesIntermediate = [
+  'image/pos_back_to_the_future.png',
+  'image/pos_me_time.png',
+  'image/pos_jumanji.png',
+];
+
+final List<String> genreDifficultyHard = [
+  'Comedy',
+  'Adventure',
+  'Biographies',
+];
+
+final List<String> genreImagesHard = [
+  'image/pos_me_time.png',
+  'image/pos_jumanji.png',
+  'image/pos_long_walk_to_freedom.png',
+];
 
 class selectGenre extends StatelessWidget {
-
   final String difficulty;
 
   const selectGenre({Key? key, required this.difficulty}) : super(key: key);
@@ -12,34 +45,28 @@ class selectGenre extends StatelessWidget {
   List<String> getImagePaths(String difficulty) {
     switch (difficulty) {
       case 'Easy':
-        return genreNames[0].sublist(5);
+        return genreImagesEasy;
+      // Add more cases for other difficulty levels
       case 'Intermediate':
-        return genreNames[1].sublist(4);
+        return genreImagesIntermediate;
       case 'Hard':
-        return genreNames[2].sublist(4);
-      case 'Phonetics 1':
-        return genreNames[3].sublist(4);
-      case 'Phonetics 2':
-        return genreNames[4].sublist(4);
+        return genreImagesHard;
       default:
-        return genreNames[0].sublist(4);
+        return [];
     }
   }
 
   List<String> getGenreNames(String difficulty) {
     switch (difficulty) {
       case 'Easy':
-        return genreNames[0].sublist(0, 5);
+        return genreDifficultyEasy;
+      // Add more cases for other difficulty levels
       case 'Intermediate':
-        return genreNames[1].sublist(0, 5);
+        return genreDifficultyIntermediate;
       case 'Hard':
-        return genreNames[2].sublist(0, 5);
-      case 'Phonetics 1':
-        return genreNames[3].sublist(0, 5);
-      case 'Phonetics 2':
-        return genreNames[4].sublist(0, 5);
+        return genreDifficultyHard;
       default:
-        return genreNames[0].sublist(0, 5);
+        return [];
     }
   }
 
@@ -47,6 +74,8 @@ class selectGenre extends StatelessWidget {
   Widget build(BuildContext context) {
     final imagePaths = getImagePaths(difficulty);
     final genreNamesList = getGenreNames(difficulty);
+
+    print('Number of genres: ${genreNamesList.length}');
 
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +95,7 @@ class selectGenre extends StatelessWidget {
                 ),
               ),
               ...List.generate(
-                5,
+                genreNamesList.length,
                 (index) => Container(
                   decoration: BoxDecoration(
                     color: const Color(0xfffcf3e3),
@@ -109,7 +138,7 @@ class selectGenre extends StatelessWidget {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
+                                color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
                                     offset: Offset(0, 3),

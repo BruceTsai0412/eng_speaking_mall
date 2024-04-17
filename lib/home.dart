@@ -23,8 +23,8 @@ class MyHomePage extends StatelessWidget {
     'Easy',
     'Intermediate',
     'Hard',
-    'Phonetics 1',
-    'Phonetics 2',
+    // 'Phonetics 1',
+    // 'Phonetics 2',
   ];
 
   @override
@@ -61,7 +61,7 @@ class MyHomePage extends StatelessWidget {
                         child: Text('Select a level', style: const TextStyle(fontSize: 20.0),),),
                     ),
                     ...List.generate(
-                      5,
+                      _levels.length,
                       (index) => InkWell(
                         onTap:() {
                           Navigator.push(
