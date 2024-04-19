@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:learn_speak_app/archive/recorder7.dart';
+// import 'package:learn_speak_app/recorder7.dart';
 // import 'package:speech_to_text/speech_to_text.dart' as stt;
 // import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -54,8 +54,6 @@
 //     _speech = stt.SpeechToText();
 
 //     _initializeSpeech();
-
-//     _startListening();
 //   }
 
 //   Future<void> _playAndPauseVideo(Duration startTime, Duration endTime) async {
@@ -174,7 +172,7 @@
 //               ),
 //             ),
 //             Container(
-//               margin: EdgeInsets.all(8.0),
+//               margin: EdgeInsets.all(15.0),
 //               height: 300,
 //               width: 380,
 //               decoration: BoxDecoration(
@@ -205,13 +203,17 @@
 //                               iconSize: 30,
 //                               color: Colors.black,
 //                               icon: Icon(Icons.mic),
-//                               onPressed: _startListening,
+//                               onPressed: () {
+//                                 _startListening();
+//                               },
 //                             ),
 //                             IconButton(
 //                               iconSize: 30,
 //                               color: Colors.black,
 //                               icon: Icon(Icons.stop),
-//                               onPressed: _stopListening,
+//                               onPressed: () {
+//                                 _stopListening();
+//                               },
 //                             ),
 //                           ],
 //                         ),
@@ -227,8 +229,8 @@
 //                               padding: EdgeInsets.fromLTRB(30,10,30,10),
 //                             ),
 //                             child: Text(
-//                               'Play',
-//                               style: const TextStyle(color: Color(0xffffffff)),
+//                               'Listen',
+//                               style: const TextStyle(fontSize: 15, color: Color(0xffffffff)),
 //                             ),
 //                           ),
 //                           ],
@@ -250,7 +252,7 @@
 //                   ),
 //                   child: Text(
 //                     'Last Line',
-//                     style: const TextStyle(color: Color(0xffffffff)),
+//                     style: const TextStyle(fontSize: 15, color: Color(0xffffffff)),
 //                   ),
 //                 ),
 //                 SizedBox(width: 60),
@@ -262,31 +264,29 @@
 //                   ),
 //                   child: Text(
 //                     'Next Line',
-//                     style: const TextStyle(color: Color(0xffffffff)),
+//                     style: const TextStyle(fontSize: 15, color: Color(0xffffffff)),
 //                   ),
 //                 ),
 //               ],
 //             ),
-//             Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 ElevatedButton(
-//                   onPressed: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(builder: (context) => Recorder7()),
-//                     );
-//                   },
-//                   style: ElevatedButton.styleFrom(
-//                     backgroundColor: Color(0xFF264683),
-//                     padding: EdgeInsets.fromLTRB(25,10,25,10),
-//                   ),
-//                   child: Text(
-//                     'Next Page',
-//                     style: const TextStyle(color: Color(0xffffffff)),
-//                   ),
+//             Padding(
+//               padding: EdgeInsets.all(16.0),
+//               child: ElevatedButton(
+//                 onPressed: () {
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(builder: (context) => Recorder7()),
+//                   );
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Color.fromARGB(255, 38, 131, 50),
+//                   padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
 //                 ),
-//               ]
+//                 child: Text(
+//                   'Ready!',
+//                   style: const TextStyle(fontSize: 18, color: Color(0xffffffff)),
+//                 ),
+//               ),
 //             ),
 //           ],
 //         ),

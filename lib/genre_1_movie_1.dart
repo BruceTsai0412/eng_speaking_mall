@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
-import 'practice.dart';
+import 'practice3.dart';
 
 class Genre1Scene extends StatelessWidget {
+  final String genre;
   final String movieName;
   final String imagePath;
-
-  Genre1Scene({required this.movieName, required this.imagePath});
-
-  final Map<String, List<String>> videoThumbnails = {
-    'La La Land': ['image/test_vid_thumbnail.png', 'image/test_vid_thumbnail.png'],
-    'Love Happens': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
-    'Titanic': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
-    'Movie title 4': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
+  final Map<String, Map<String, List<String>>> videoThumbnails = {
+    'Romance': {
+      'La La Land': ['image/test_vid_thumbnail.png', 'image/test_vid_thumbnail.png'],
+      'Love Happens': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
+      //... other movie thumbnails...
+    },
+    'Sci-Fi': {
+      'La La Land': ['image/test_vid_thumbnail.png', 'image/test_vid_thumbnail.png'],
+      'Titanic': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
+      //... other movie thumbnails...
+    },
+    //... other genres...
   };
+
+  Genre1Scene({required this.genre, required this.movieName, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
+    int sceneNumber = 1;
     return Scaffold(
       appBar: AppBar(
         title: Text('Genre1Scene'),
@@ -41,14 +49,16 @@ class Genre1Scene extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.0),
-              ...List.generate(
-                videoThumbnails[movieName]!.length,
+            ...List.generate(
+                videoThumbnails[genre]![movieName]!.length,
                 (index) {
                   return InkWell(
                     onTap: () {
+                        print('movieName: $movieName');
+                        print('sceneNumber: $sceneNumber');
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Practice()),
+                        MaterialPageRoute(builder: (context) => Practice3(movieName: movieName, sceneNumber: sceneNumber + index)),
                       );
                     },
                     child: Container(
@@ -56,14 +66,14 @@ class Genre1Scene extends StatelessWidget {
                       child: Column(
                         children: [
                           Image.asset(
-                            videoThumbnails[movieName]![index],
+                            videoThumbnails[genre]![movieName]![index],
                             height: 200.0,
                             width: 340.0,
                           ),
                           SizedBox(height: 6.0),
                           Text(
                             'Scene ${index + 1}',
-                            style: const TextStyle(
+                              style: const TextStyle(
                               fontSize: 20.0,
                             ),
                           ),

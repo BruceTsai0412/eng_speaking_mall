@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'select_genre.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MyApp()
+  );
 }
 
 class MyApp extends StatelessWidget {
+    const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,8 +27,6 @@ class MyHomePage extends StatelessWidget {
     'Easy',
     'Intermediate',
     'Hard',
-    // 'Phonetics 1',
-    // 'Phonetics 2',
   ];
 
   @override

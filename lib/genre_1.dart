@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'genre_1_movie_1.dart';
-import 'genre_1_movie_2.dart';
-import 'genre_1_movie_3.dart';
 
   class GenreData {
     final List<String> movieTitles;
@@ -256,8 +254,8 @@ class _Genre1State extends State<Genre1> {
               (index) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  buildMovieContainer(_genreData.movieTitles[2 * index], _genreData.imagePaths[2 * index], index * 2),
-                  buildMovieContainer(_genreData.movieTitles[2 * index + 1], _genreData.imagePaths[2 * index + 1], index * 2 + 1),
+                  buildMovieContainer(_genreData.movieTitles[2 * index], _genreData.imagePaths[2 * index], index * 2, _genreData.routes[2 * index], context),
+                  buildMovieContainer(_genreData.movieTitles[2 * index + 1], _genreData.imagePaths[2 * index + 1], index * 2 + 1, _genreData.routes[2 * index + 1], context),
                 ],
               ),
             ),
@@ -267,7 +265,7 @@ class _Genre1State extends State<Genre1> {
     );
   }
 
-  Column buildMovieContainer(String title, String imagePath, int index) {
+  Column buildMovieContainer(String title, String imagePath, int index, String route, BuildContext context) {
     return Column(
       children: [
         Container(
@@ -292,15 +290,15 @@ class _Genre1State extends State<Genre1> {
         SizedBox(
           height: 35.0,
           child: ElevatedButton(
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Genre1Scene(movieName: _genreData.movieTitles[index], imagePath: _genreData.imagePaths[index])),
-    );
-  },
-  style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)),
-  child: Text('Select', style: const TextStyle(color: Color(0xffffffff),),),
-),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Genre1Scene(genre: widget.genre, movieName: _genreData.movieTitles[index], imagePath: _genreData.imagePaths[index])),
+              );
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)),
+            child: Text('Select', style: const TextStyle(color: Color(0xffffffff),),),
+          ),
         ),
       ],
     );
