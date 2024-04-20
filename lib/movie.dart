@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'practice3.dart';
 
-class Genre1Scene extends StatelessWidget {
+class Movie extends StatelessWidget {
   final String genre;
   final String movieName;
   final String imagePath;
   final Map<String, Map<String, List<String>>> videoThumbnails = {
     'Romance': {
-      'La La Land': ['image/test_vid_thumbnail.png', 'image/test_vid_thumbnail.png'],
-      'Love Happens': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
+      'Notting Hill': ['image/thumbnail_hotting_hill_A.png', 'image/thumbnail_hotting_hill_B.png'],
+      'Titanic': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
       //... other movie thumbnails...
     },
     'Sci-Fi': {
@@ -19,14 +19,14 @@ class Genre1Scene extends StatelessWidget {
     //... other genres...
   };
 
-  Genre1Scene({required this.genre, required this.movieName, required this.imagePath});
+  Movie({required this.genre, required this.movieName, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     int sceneNumber = 1;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Genre1Scene'),
+        title: Text('Movie'),
       ),
       backgroundColor: Color(0xFFFFCD45),
       body: Scrollbar(

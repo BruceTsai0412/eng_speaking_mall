@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'genre_1_movie_1.dart';
+import 'movie.dart';
 
   class GenreData {
     final List<String> movieTitles;
@@ -16,22 +16,22 @@ import 'genre_1_movie_1.dart';
           case 'Romance':
             return GenreData(
               [
-                'La La Land',
+                'Notting Hill',
                 'Love Happens',
                 'Titanic',
                 'Movie title 4',
               ],
               [
-                'image/pos_la_la_land.png',
-                'image/pos_love_happens.png',
+                'image/pos_notting_hill.png',
                 'image/pos_titanic.png',
+                'image/pos_love_happens.png',
                 'image/pos_la_la_land.png',
               ],
               [
-                '/genre1scene',
-                '/genre1scene2',
-                '/genre1scene3',
-                '/genre1scene',
+                '/movie',
+                '/movie',
+                '/movie',
+                '/movie',
               ],
             );
           case 'Sci-Fi':
@@ -220,17 +220,17 @@ import 'genre_1_movie_1.dart';
     }
   }
 
-class Genre1 extends StatefulWidget {
+class Genre extends StatefulWidget {
   final String difficulty;
   final String genre;
 
-  const Genre1({Key? key, required this.difficulty, required this.genre}) : super(key: key);
+  const Genre({Key? key, required this.difficulty, required this.genre}) : super(key: key);
 
   @override
   _Genre1State createState() => _Genre1State();
 }
 
-class _Genre1State extends State<Genre1> {
+class _Genre1State extends State<Genre> {
   late GenreData _genreData;
 
   @override
@@ -293,7 +293,7 @@ class _Genre1State extends State<Genre1> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Genre1Scene(genre: widget.genre, movieName: _genreData.movieTitles[index], imagePath: _genreData.imagePaths[index])),
+                MaterialPageRoute(builder: (context) => Movie(genre: widget.genre, movieName: _genreData.movieTitles[index], imagePath: _genreData.imagePaths[index])),
               );
             },
             style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF264683)),

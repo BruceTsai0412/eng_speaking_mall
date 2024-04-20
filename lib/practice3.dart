@@ -11,11 +11,13 @@ class Practice3 extends StatefulWidget {
 
     // Maps for startEndTimes, _sentences, and initialVideoId
     final Map<String, Map<int, List<List<Duration>>>> startEndTimesMap = {
-      'La La Land': {
+      'Notting Hill': {
         1: [
-          [Duration(seconds: 0), Duration(seconds: 6)],
-          [Duration(seconds: 10), Duration(seconds: 15)],
-          //...
+          [Duration(seconds: 1), Duration(seconds: 4)],
+          [Duration(seconds: 5), Duration(seconds: 6)],
+          [Duration(seconds: 6), Duration(seconds: 9)],
+          [Duration(seconds: 9), Duration(seconds: 13)],
+          [Duration(seconds: 13), Duration(seconds: 15)],
         ],
         2: [
           [Duration(seconds: 0), Duration(seconds: 6)],
@@ -30,11 +32,13 @@ class Practice3 extends StatefulWidget {
     };
 
     final Map<String, Map<int, List<String>>> sentencesMap = {
-      'La La Land': {
+      'Notting Hill': {
         1: [
-          'Hello, how are you?',
-          'I am doing well, thank you.',
-          //...
+          'I saw you put that book down your trousers.',
+          'What book?',
+          'The one down your trousers.',
+          "I don't have a book down my trousers.",
+          "Right. I tell you what, I'll call the police",
         ],
         2: [
           'Hello, how are you?',
@@ -49,10 +53,9 @@ class Practice3 extends StatefulWidget {
     };
 
     final Map<String, Map<int, String>> initialVideoIdsMap = {
-      'La La Land': {
-        1: 'FWG3Dfss3Jc',
+      'Notting Hill': {
+        1: 'ArlsU2_cUbg&t=5s',
         2: 'FWG3Dfss3Jc',
-        //...
       },
       'Movie2': {
         //...

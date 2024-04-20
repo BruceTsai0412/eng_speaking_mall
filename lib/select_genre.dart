@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'genre_1.dart';
+import 'genre.dart';
 
 final List<String> genreDifficultyEasy = [
   'Romance',
@@ -158,7 +158,7 @@ class selectGenre extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Genre1(
+                                          builder: (context) => Genre(
                                             difficulty: difficulty,
                                             genre: genreNamesList[index],
                                           ),

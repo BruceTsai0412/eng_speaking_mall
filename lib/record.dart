@@ -108,7 +108,7 @@ class _RecordState extends State<Record> {
       context: context,
       builder: (context) {
         return CountdownDialog(
-          duration: const Duration(seconds: 3),
+          duration: const Duration(seconds: 5),
           onFinished: () async {
             try {
               String filePath = await _getRecordingFilePath();
@@ -223,7 +223,10 @@ class _RecordState extends State<Record> {
                         maxLines: null,
                         textAlign: TextAlign.center,
                         ),
-                        for (String sentence in widget.sentences) Text(sentence),
+                        for (String sentence in widget.sentences) Text(
+                          style: TextStyle(fontSize: 20),
+                        sentence
+                        ),
                       ],
                     ),
                   ),
@@ -303,7 +306,6 @@ class CountdownDialog extends StatefulWidget {
 class _CountdownDialogState extends State<CountdownDialog> {
   late Timer _timer;
   late int _seconds;
-  bool _showSecondGif = false;
 
   @override
   void initState() {
@@ -316,9 +318,6 @@ class _CountdownDialogState extends State<CountdownDialog> {
           _timer.cancel();
           widget.onFinished();
           Navigator.pop(context);
-          setState(() {
-            _showSecondGif = true;
-          });
         }
       });
     });
@@ -327,13 +326,7 @@ class _CountdownDialogState extends State<CountdownDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset('image/clapper.gif'),
-          if (_showSecondGif) Image.asset('image/clapper.gif'),
-        ],
-      ),
+      content: Image.asset('image/countdown.gif'),
     );
   }
 
