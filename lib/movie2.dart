@@ -13,10 +13,10 @@ class Movie extends StatelessWidget {
     'Notting Hill': ['image/thumbnail_notting_hill_A.png', 'image/thumbnail_notting_hill_B.png'],
     'Soul': ['image/thumbnail_soul_a.png', 'image/thumbnail_soul_a.png'],
     'The Hunger Games': ['image/thumbnail_the_hunger_games_a.png', 'image/thumbnail_the_hunger_games_b.png'],
-    'Men In Black': ['image/thumbnail_bucket_list.png'],
-    'Back to the Future': ['image/thumbnail_mib_a.png', 'image/thumbnail_mib_b.png'],
-    'Inception': ['image/thumbnail_inceptino_b.png', 'image/thumbnail_inceptino_a.png'],
-    'Inside Out': ['image/thumbnail_inside_out_a.png', 'image/thumbnail_inside_out_a.png'],
+    'Men In Black': ['image/thumbnail_mib_a.png', 'image/thumbnail_mib_b.png'],
+    'Back to the Future': ['image/thumbnail_back_to_the_future_a.png', 'image/thumbnail_back_to_the_future_b.png'],
+    'Inception': ['image/thumbnail_inception_b.png', 'image/thumbnail_inception_a.png'],
+    'Inside Out': ['image/thumbnail_inside_out_a.png', 'image/thumbnail_inside_out_b.png'],
   };
 
   Movie({super.key, required this.movieName, required this.imagePath});
