@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'select_genre.dart';
+import 'select_movie.dart';
 
 void main() {
   runApp(
-    MyApp()
+    const MyApp()
   );
 }
 
@@ -33,18 +33,18 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
-      backgroundColor: Color(0xffffcd45),
+      backgroundColor: const Color(0xffffcd45),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(5.0),
+              const Padding(
+                padding: EdgeInsets.all(5.0),
                 child: Align(
-                  alignment: const Alignment(-0.9, 0),
-                  child: Text('What\'s New', style: const TextStyle(fontSize: 20.0),),
+                  alignment: Alignment(-0.9, 0),
+                  child: Text('What\'s New', style: TextStyle(fontSize: 20.0),),
                 ),
               ),
               const SizedBox.shrink(),
@@ -56,11 +56,11 @@ class MyHomePage extends StatelessWidget {
                       height: 180.0,
                       width: 350.0,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
                       child: Align(
                         alignment: Alignment(-0.9, 0),
-                        child: Text('Select a level', style: const TextStyle(fontSize: 20.0),),),
+                        child: Text('Select a level', style: TextStyle(fontSize: 20.0),),),
                     ),
                     ...List.generate(
                       _levels.length,
@@ -69,7 +69,7 @@ class MyHomePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => selectGenre(difficulty: _levels[index]),
+                              builder: (context) => selectMovie(difficulty: _levels[index]),
                             ),
                           ); 
                         },

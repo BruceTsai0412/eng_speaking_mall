@@ -2,33 +2,33 @@ import 'package:flutter/material.dart';
 import 'practice3.dart';
 
 class Movie extends StatelessWidget {
-  final String genre;
   final String movieName;
   final String imagePath;
-  final Map<String, Map<String, List<String>>> videoThumbnails = {
-    'Romance': {
-      'Notting Hill': ['image/thumbnail_hotting_hill_A.png', 'image/thumbnail_hotting_hill_B.png'],
-      'Titanic': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
-      //... other movie thumbnails...
-    },
-    'Sci-Fi': {
-      'La La Land': ['image/test_vid_thumbnail.png', 'image/test_vid_thumbnail.png'],
-      'Titanic': ['image/test_vid_thumbnail_1.png', 'image/test_vid_thumbnail_2.png'],
-      //... other movie thumbnails...
-    },
-    //... other genres...
+  final Map<String, List<String>> videoThumbnails = {
+    'Bucket List': ['image/thumbnail_bucket_list.png'],
+    'Charlie and the Chocolate\n                Factory': ['image/thumbnail_chocolate_factory.png'],
+    'The Princess Diaries': ['image/thumbnail_princess_b.png', 'image/thumbnail_princess_a.png'], 
+    'Titanic': ['image/thumbnail_titanic_b.png', 'image/thumbnail_titanic_a.png'],
+    'Jurassic Park': ['image/thumbnail_jurassic_park_a.png', 'image/thumbnail_jurassic_park_b.png'],
+    'Notting Hill': ['image/thumbnail_notting_hill_A.png', 'image/thumbnail_notting_hill_B.png'],
+    'Soul': ['image/thumbnail_soul_a.png', 'image/thumbnail_soul_a.png'],
+    'The Hunger Games': ['image/thumbnail_the_hunger_games_a.png', 'image/thumbnail_the_hunger_games_b.png'],
+    'Men In Black': ['image/thumbnail_bucket_list.png'],
+    'Back to the Future': ['image/thumbnail_mib_a.png', 'image/thumbnail_mib_b.png'],
+    'Inception': ['image/thumbnail_inceptino_b.png', 'image/thumbnail_inceptino_a.png'],
+    'Inside Out': ['image/thumbnail_inside_out_a.png', 'image/thumbnail_inside_out_a.png'],
   };
 
-  Movie({required this.genre, required this.movieName, required this.imagePath});
+  Movie({super.key, required this.movieName, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     int sceneNumber = 1;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Movie'),
+        title: const Text('Movie'),
       ),
-      backgroundColor: Color(0xFFFFCD45),
+      backgroundColor: const Color(0xFFFFCD45),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
@@ -48,9 +48,9 @@ class Movie extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
             ...List.generate(
-                videoThumbnails[genre]![movieName]!.length,
+                videoThumbnails[movieName]!.length,
                 (index) {
                   return InkWell(
                     onTap: () {
@@ -62,15 +62,15 @@ class Movie extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Image.asset(
-                            videoThumbnails[genre]![movieName]![index],
+                            videoThumbnails[movieName]![index],
                             height: 200.0,
                             width: 340.0,
                           ),
-                          SizedBox(height: 6.0),
+                          const SizedBox(height: 6.0),
                           Text(
                             'Scene ${index + 1}',
                               style: const TextStyle(

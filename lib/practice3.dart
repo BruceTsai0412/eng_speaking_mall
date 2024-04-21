@@ -13,20 +13,38 @@ class Practice3 extends StatefulWidget {
     final Map<String, Map<int, List<List<Duration>>>> startEndTimesMap = {
       'Notting Hill': {
         1: [
-          [Duration(seconds: 1), Duration(seconds: 4)],
-          [Duration(seconds: 5), Duration(seconds: 6)],
-          [Duration(seconds: 6), Duration(seconds: 9)],
-          [Duration(seconds: 9), Duration(seconds: 13)],
-          [Duration(seconds: 13), Duration(seconds: 15)],
+          [Duration(minutes: 1, seconds: 27), Duration(minutes: 1, seconds: 31)],
+          [Duration(minutes: 1, seconds: 31), Duration(minutes: 1, seconds: 33)],
+          [Duration(minutes: 1, seconds: 33), Duration(minutes: 1, seconds: 36)],
+          [Duration(minutes: 1, seconds: 36), Duration(minutes: 1, seconds: 41)],
+          [Duration(minutes: 1, seconds: 39), Duration(minutes: 1, seconds: 43)],
         ],
         2: [
-          [Duration(seconds: 0), Duration(seconds: 6)],
-          [Duration(seconds: 10), Duration(seconds: 15)],
+          [Duration(minutes: 2, seconds: 7), Duration(minutes: 2, seconds: 10)],
+          [Duration(minutes: 2, seconds: 10), Duration(minutes: 2, seconds: 13)],
+          [Duration(minutes: 2, seconds: 13), Duration(minutes: 2, seconds: 17)],
+          [Duration(minutes: 2, seconds: 17), Duration(minutes: 2, seconds: 20)],
+          [Duration(minutes: 2, seconds: 20), Duration(minutes: 2, seconds: 24)],
+          [Duration(minutes: 2, seconds: 23), Duration(minutes: 2, seconds: 26)],
         ],
         //...
       },
-      'Movie2': {
-        //...
+      'Titanic': {
+        1: [
+          [Duration(minutes: 1, seconds: 27), Duration(minutes: 1, seconds: 31)],
+          [Duration(minutes: 1, seconds: 31), Duration(minutes: 1, seconds: 33)],
+          [Duration(minutes: 1, seconds: 33), Duration(minutes: 1, seconds: 36)],
+          [Duration(minutes: 1, seconds: 36), Duration(minutes: 1, seconds: 41)],
+          [Duration(minutes: 1, seconds: 39), Duration(minutes: 1, seconds: 43)],
+        ],
+        2: [
+          [Duration(minutes: 2, seconds: 7), Duration(minutes: 2, seconds: 10)],
+          [Duration(minutes: 2, seconds: 10), Duration(minutes: 2, seconds: 13)],
+          [Duration(minutes: 2, seconds: 13), Duration(minutes: 2, seconds: 17)],
+          [Duration(minutes: 2, seconds: 17), Duration(minutes: 2, seconds: 20)],
+          [Duration(minutes: 2, seconds: 20), Duration(minutes: 2, seconds: 24)],
+          [Duration(minutes: 2, seconds: 23), Duration(minutes: 2, seconds: 26)],
+        ],
       },
       //...
     };
@@ -34,31 +52,52 @@ class Practice3 extends StatefulWidget {
     final Map<String, Map<int, List<String>>> sentencesMap = {
       'Notting Hill': {
         1: [
-          'I saw you put that book down your trousers.',
-          'What book?',
-          'The one down your trousers.',
+          "I saw you put that book down your trousers.",
+          "What book?",
+          "The one down your trousers.",
           "I don't have a book down my trousers.",
-          "Right. I tell you what, I'll call the police",
+          "Right. I tell you what, I'll call the police.",
         ],
         2: [
-          'Hello, how are you?',
-          'I am doing well, thank you.',
+          "Sorry about that.",
+          "No, that's fine.",
+          "I was going to steal one myself but now I've changed my mind.",
+          "Signed by the author, I see.",
+          "Yah, we couldn't stop him.",
+          "If you can find an unsigned one, it's worth an absolute fortune.",
         ],
-        //...
       },
-      'Movie2': {
-        //...
+      'Titanic': {
+        1: [
+          "Don't do it.",
+          "Stay back. Don't come any closer.",
+          "Come on. Just give me your hand. I'll pull you back over.",
+          "No! Stay where you are. I mean it. I'll let go.",
+          "No,you won't.",
+          "What do you mean, no, I won't?",
+          "Don't presume to tell me what I will and will not do. You don't know me.",
+          "Well,you would have done it already.",
+        ],
+        2: [
+          "Now hold on to the railing. Keep your eyes closed, don't peek."
+          "Step up onto the rail.",
+          "Hold on. Hold on. Keep your eyes closed.",
+          "Do you trust me?",
+          "All right, open your eyes.",
+          "I'm flying! Jack!",
+        ],
       },
       //...
     };
 
     final Map<String, Map<int, String>> initialVideoIdsMap = {
       'Notting Hill': {
-        1: 'ArlsU2_cUbg&t=5s',
-        2: 'FWG3Dfss3Jc',
+        1: 'mpZgODL1eGw',
+        2: 'mpZgODL1eGw',
       },
-      'Movie2': {
-        //...
+      'Titanic': {
+        1: 'zSRvmHSgaBg',
+        2: '1YGfrGKK9Mo',
       },
       //...
     };
@@ -81,8 +120,7 @@ class _VideoTestState extends State<Practice3> {
   @override
   void initState() {
     super.initState();
-
-    // Get startEndTimes, _sentences, and initialVideoId from maps
+    
     _startEndTimes = widget.startEndTimesMap[widget.movieName]![widget.sceneNumber]!;
     _sentences = widget.sentencesMap[widget.movieName]![widget.sceneNumber]!;
     _initialVideoId = widget.initialVideoIdsMap[widget.movieName]![widget.sceneNumber]!;
@@ -239,8 +277,9 @@ class _VideoTestState extends State<Practice3> {
                           maxLines: null,
                           textAlign: TextAlign.center,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Wrap(
+                          direction: Axis.horizontal,
+                          alignment: WrapAlignment.center,
                           children: splitDisplayingSentenceWithColors(_sentences[_currentSentenceIndex]),
                         ),
                         Row(
