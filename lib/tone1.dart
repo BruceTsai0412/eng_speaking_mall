@@ -1,5 +1,4 @@
 // ignore_for_file: unused_field
-
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -8,17 +7,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Record extends StatefulWidget {
-  final List<String> sentences;
-  final String initialVideoId;
-
-  Record({super.key, required this.sentences, required this.initialVideoId});
+class Tone1 extends StatefulWidget {
 
   @override
   _RecordState createState() => _RecordState();
 }
 
-class _RecordState extends State<Record> {
+class _RecordState extends State<Tone1> {
   late YoutubePlayerController _controller;
   YoutubePlayerValue? _playerValue;
   late flutterSound.FlutterSoundRecorder _audioRecorder;
@@ -31,22 +26,21 @@ class _RecordState extends State<Record> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: widget.initialVideoId,
+      initialVideoId: 'fOONIlhXFh4',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
       ),
     )..addListener(() {
-        if (_controller.value.playerState == PlayerState.ended) {
-          _controller.seekTo(Duration.zero);
-        }
-      });
-
-    _controller.addListener(() {
-      setState(() {
-        _playerValue = _controller.value;
-      });
+      if (_controller.value.playerState == PlayerState.ended) {
+        _controller.seekTo(Duration.zero);
+      }
+      if (_controller.value.position.inMinutes == 2 && _controller.value.position.inSeconds >= 25) {
+        _controller.pause();
+      }
     });
+    
+    _controller.seekTo(const Duration(minutes: 0, seconds: 52));
 
     _audioRecorder = flutterSound.FlutterSoundRecorder();
     _audioPlayer = flutterSound.FlutterSoundPlayer();
@@ -227,12 +221,11 @@ class _RecordState extends State<Record> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            for (String sentence in widget.sentences)
                               Container(
                                 margin: const EdgeInsets.only(bottom: 10),
-                                child: Text(
-                                  sentence,
-                                  style: const TextStyle(fontSize: 20),
+                                child: const Text(
+                                  'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT',
+                                  style: TextStyle(fontSize: 20),
                                 ),
                               ),
                           ],
