@@ -19,11 +19,17 @@ The Language Learning App is designed as a MALL app targeting local secondary st
 To get started with the Language Learning App, follow these steps:
 
 Clone the repository to your local machine.
+
 Install the required dependencies and libraries.
+
 Launch the app on your mobile device or emulator.
+
 Explore the different movie scenes available.
+
 Select a scene and study the provided context and dialogue lines.
+
 Practice your own voice-over of the scene.
+
 Enjoy the process of enhancing your English speaking abilities through movies and videos!
 
 ## Contributing
