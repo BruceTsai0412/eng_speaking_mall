@@ -436,7 +436,7 @@ class Practice3 extends StatefulWidget {
           "I'm sure.",
         ]
       },
-     '': {
+     'The Hunger Games': {
         1:[
           "Oh, joy. Why don't you join us?",
           "I was just giving some life saving advice.",
@@ -571,7 +571,7 @@ class _VideoTestState extends State<Practice3> {
         });
       },
     );
-}
+  }
 
   Future<void> _stopListening() async {
     await _speech.stop();
@@ -613,7 +613,7 @@ class _VideoTestState extends State<Practice3> {
   List<bool> compareWords(List<String> sentenceWords, List<String> speechWords) {
     List<bool> comparedWords = [];
     List<String> lowerCaseSentenceWords = sentenceWords.map((word) => word.toLowerCase()).toList();
-    List<String> lowerCaseSpeechWords = speechWords.map((word) => word.toLowerCase()).toList();
+    Set<String> lowerCaseSpeechWords = speechWords.map((word) => word.toLowerCase()).toSet();
     for (int i = 0; i < lowerCaseSentenceWords.length; i++) {
       bool match = lowerCaseSpeechWords.contains(lowerCaseSentenceWords[i]);
       print('Comparing ${lowerCaseSentenceWords[i]} to ${lowerCaseSpeechWords.join(', ')}: $match');

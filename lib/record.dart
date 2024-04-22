@@ -10,7 +10,7 @@ class Record extends StatefulWidget {
   final List<String> sentences;
   final String initialVideoId;
 
-  Record({required this.sentences, required this.initialVideoId});
+  Record({super.key, required this.sentences, required this.initialVideoId});
 
   @override
   _RecordState createState() => _RecordState();
@@ -30,7 +30,7 @@ class _RecordState extends State<Record> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.initialVideoId,
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
       ),
@@ -120,6 +120,7 @@ class _RecordState extends State<Record> {
                 _recordingFilePath = filePath;
                 _isRecording = true;
               });
+              _controller.play();
             } catch (e) {
               print('Error starting recorder: $e');
             }
@@ -188,9 +189,9 @@ class _RecordState extends State<Record> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Record'),
+        title: const Text('Record'),
       ),
-      backgroundColor: Color(0xffffcd45),
+      backgroundColor: const Color(0xffffcd45),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -203,73 +204,84 @@ class _RecordState extends State<Record> {
                 handleColor: Colors.amberAccent,
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(15.0),
-              height: 300,
-              width: 380,
-              decoration: BoxDecoration(
-                color: Color(0xfffcf3e3),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.black, width: 1.5),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text('Your Script:',
-                        style: TextStyle(fontSize: 20),
-                        maxLines: null,
-                        textAlign: TextAlign.center,
+            const Text('Your Script:',
+            style: TextStyle(fontSize: 20),
+            maxLines: null,
+            textAlign: TextAlign.center,
+            ),
+            SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.all(15.0),
+                height: 300,
+                width: 380,
+                decoration: BoxDecoration(
+                  color: const Color(0xfffcf3e3),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.black, width: 1.5),
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            for (String sentence in widget.sentences)
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  sentence,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                          ],
                         ),
-                        for (String sentence in widget.sentences) Text(
-                          style: TextStyle(fontSize: 20),
-                        sentence
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:[
-                      IconButton(
-                        iconSize: 30,
-                        color: _isRecording ? Colors.red : Colors.black,
-                        icon: Icon(_isRecording ? Icons.stop : Icons.mic),
-                        onPressed: _recordAudio,
-                      ),
-                      IconButton(
-                        iconSize: 30,
-                        color: Colors.black,
-                        icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
-                        onPressed: _playbackFilePath != null? _togglePlayPause : null,
-                      ),
-                      IconButton(
-                        iconSize: 30,
-                        color: Colors.black,
-                        icon: Icon(Icons.undo),
-                        onPressed: _playbackFilePath != null ? _undo : null,
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                IconButton(
+                  iconSize: 30,
+                  color: _isRecording ? Colors.red : Colors.black,
+                  icon: Icon(_isRecording ? Icons.stop : Icons.mic),
+                  onPressed: _recordAudio,
+                ),
+                IconButton(
+                  iconSize: 30,
+                  color: Colors.black,
+                  icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
+                  onPressed: _playbackFilePath != null? _togglePlayPause : null,
+                ),
+                IconButton(
+                  iconSize: 30,
+                  color: Colors.black,
+                  icon: const Icon(Icons.undo),
+                  onPressed: _playbackFilePath != null ? _undo : null,
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // Add your onPressed callback here
+                  onPressed: () async {
+                    if (_playbackFilePath!= null) {
+                      await _playAudio();
+                      _controller.play();
+                      _controller.mute();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 38, 131, 50),
-                    padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    backgroundColor: const Color.fromARGB(255, 38, 131, 50),
+                    padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Play!',
-                    style: const TextStyle(fontSize: 18, color: Color(0xffffffff)),
+                    style: TextStyle(fontSize: 18, color: Color(0xffffffff)),
                   ),
                 ),
               ],
@@ -297,7 +309,7 @@ class CountdownDialog extends StatefulWidget {
   final Duration duration;
   final VoidCallback onFinished;
 
-  CountdownDialog({required this.duration, required this.onFinished});
+  const CountdownDialog({super.key, required this.duration, required this.onFinished});
 
   @override
   _CountdownDialogState createState() => _CountdownDialogState();
@@ -311,7 +323,7 @@ class _CountdownDialogState extends State<CountdownDialog> {
   void initState() {
     super.initState();
     _seconds = widget.duration.inSeconds;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _seconds--;
         if (_seconds <= 0) {
