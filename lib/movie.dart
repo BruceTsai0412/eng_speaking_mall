@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'practice3.dart';
+import 'practice.dart';
 
 class Movie extends StatelessWidget {
   final String movieName;

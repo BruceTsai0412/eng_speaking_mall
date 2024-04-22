@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'movie2.dart';
+import 'movie.dart';
 
   class MovieData {
     final List<String> movieTitles;
