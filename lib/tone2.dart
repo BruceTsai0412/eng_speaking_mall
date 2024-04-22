@@ -26,22 +26,21 @@ class _RecordState extends State<Tone2> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: ,
+      initialVideoId: 'ybsyQaIr1nw',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
       ),
     )..addListener(() {
-        if (_controller.value.playerState == PlayerState.ended) {
-          _controller.seekTo(Duration.zero);
-        }
-      });
-
-    _controller.addListener(() {
-      setState(() {
-        _playerValue = _controller.value;
-      });
+      if (_controller.value.playerState == PlayerState.ended) {
+        _controller.seekTo(Duration.zero);
+      }
+      if (_controller.value.position.inMinutes == 2 && _controller.value.position.inSeconds >= 24) {
+        _controller.pause();
+      }
     });
+
+    _controller.seekTo(const Duration(minutes: 1, seconds: 50));
 
     _audioRecorder = flutterSound.FlutterSoundRecorder();
     _audioPlayer = flutterSound.FlutterSoundPlayer();
@@ -186,7 +185,7 @@ class _RecordState extends State<Tone2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Record'),
+        title: const Text('Tone: Sadness'),
       ),
       backgroundColor: const Color(0xffffcd45),
       body: SingleChildScrollView(
@@ -201,7 +200,7 @@ class _RecordState extends State<Tone2> {
                 handleColor: Colors.amberAccent,
               ),
             ),
-            const Text('Your Script:',
+            const Text('Expressing Sadness through Tone and Intonation:',
             style: TextStyle(fontSize: 20),
             maxLines: null,
             textAlign: TextAlign.center,
@@ -223,9 +222,21 @@ class _RecordState extends State<Tone2> {
                         child: Column(
                           children: [
                               Container(
+                                
                                 margin: const EdgeInsets.only(bottom: 10),
-                                child: const Text(
-                                  'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT',
+                                child: const Text('''
+Scripts:
+I said a lot of terrible things to you. But... I know you never... Maybe you don't wanna talk to me...
+
+But let me finish. However it... my heart was broken. It's always gonna be broken. I know your heart is broken too.
+
+Tips:
+1. Use a gentle and subdued vocal tone to convey vulnerability and melancholy.
+2. Speak at a slower pace to reflect the weightiness of sadness.
+3. Lower your pitch slightly to evoke a deeper sense of sadness.
+4. Introduce a subtle quiver or tremble in your voice to depict emotional fragility.
+5. Use nuanced inflections to evoke a mournful quality.
+''',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),

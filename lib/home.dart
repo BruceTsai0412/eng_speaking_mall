@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:learn_speak_app/tone1.dart';
 import 'package:learn_speak_app/tone2.dart';
 import 'package:learn_speak_app/tone3.dart';
-import 'package:learn_speak_app/tone4.dart';
 import 'select_movie.dart';
 
 void main() {
@@ -34,10 +33,9 @@ class MyHomePage extends StatelessWidget {
   ];
 
   final List<String> _toneOfVoiceTopics = [
-    'Body Language',
-    'Emphasis',
-    'Pace',
-    'Pitch',
+    'Rage',
+    'Sadness',
+    'Happiness',
   ];
 
   @override
@@ -147,12 +145,6 @@ class MyHomePage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Tone3()),
-                              );
-                              break;
-                            case 'Pitch':
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Tone4()),
                               );
                               break;
                             default:

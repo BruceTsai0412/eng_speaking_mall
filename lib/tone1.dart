@@ -39,7 +39,7 @@ class _RecordState extends State<Tone1> {
         _controller.pause();
       }
     });
-    
+
     _controller.seekTo(const Duration(minutes: 0, seconds: 52));
 
     _audioRecorder = flutterSound.FlutterSoundRecorder();
@@ -185,7 +185,7 @@ class _RecordState extends State<Tone1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Record'),
+        title: const Text('Tone: Rage'),
       ),
       backgroundColor: const Color(0xffffcd45),
       body: SingleChildScrollView(
@@ -200,7 +200,7 @@ class _RecordState extends State<Tone1> {
                 handleColor: Colors.amberAccent,
               ),
             ),
-            const Text('Your Script:',
+            const Text('Expressing Rage through Tone and Intonation:',
             style: TextStyle(fontSize: 20),
             maxLines: null,
             textAlign: TextAlign.center,
@@ -222,9 +222,38 @@ class _RecordState extends State<Tone1> {
                         child: Column(
                           children: [
                               Container(
+                                
                                 margin: const EdgeInsets.only(bottom: 10),
-                                child: const Text(
-                                  'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT',
+                                child: const Text('''
+Scripts:
+Misfiled?
+
+Who? Who? What do you mean? Who?
+
+You don't?
+
+How could somebody misfile something?
+What could be easier?
+It's all alphabetical.
+You just put it in the right file.
+According to alphabetical order.
+You know, A, B, C, D, E, F, G...
+
+... H, I, J, K, L, M, N, O, P...
+
+... Q, R, S, T, U, V, W, X, Y, Z!
+Huh? That's all you have to do.
+
+I never misfiled anything. Not once. Not one time!
+
+Tips:
+1. Utilize a controlled and simmering vocal tone, exhibiting measured delivery and underlying tension to convey anger.
+2. Gradually escalate volume, pace, and intensity, reflecting the character's rising frustration and anger.
+3. Emphasize key words or phrases to heighten impact and intensity in expression.
+4. Employ forceful intonations, projecting the voice with power to convey unleashed fury.
+5. Vary pitch and inflection to capture emotional nuances of rage, using higher pitches for agitation and lower pitches for deeper anger.
+6. Incorporate purposeful pauses and breaks to create dramatic moments.
+''',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),

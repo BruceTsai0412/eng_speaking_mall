@@ -26,22 +26,21 @@ class _RecordState extends State<Tone3> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: ,
+      initialVideoId: 'ybsyQaIr1nw',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
       ),
     )..addListener(() {
-        if (_controller.value.playerState == PlayerState.ended) {
-          _controller.seekTo(Duration.zero);
-        }
-      });
-
-    _controller.addListener(() {
-      setState(() {
-        _playerValue = _controller.value;
-      });
+      if (_controller.value.playerState == PlayerState.ended) {
+        _controller.seekTo(Duration.zero);
+      }
+      if (_controller.value.position.inMinutes == 0 && _controller.value.position.inSeconds >= 10) {
+        _controller.pause();
+      }
     });
+
+    _controller.seekTo(const Duration(minutes: 0, seconds: 0));
 
     _audioRecorder = flutterSound.FlutterSoundRecorder();
     _audioPlayer = flutterSound.FlutterSoundPlayer();
@@ -186,7 +185,7 @@ class _RecordState extends State<Tone3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Record'),
+        title: const Text('Tone: Happiness'),
       ),
       backgroundColor: const Color(0xffffcd45),
       body: SingleChildScrollView(
@@ -201,7 +200,7 @@ class _RecordState extends State<Tone3> {
                 handleColor: Colors.amberAccent,
               ),
             ),
-            const Text('Your Script:',
+            const Text('Expressing Happiness through Tone and Intonation:',
             style: TextStyle(fontSize: 20),
             maxLines: null,
             textAlign: TextAlign.center,
@@ -223,9 +222,21 @@ class _RecordState extends State<Tone3> {
                         child: Column(
                           children: [
                               Container(
+                                
                                 margin: const EdgeInsets.only(bottom: 10),
-                                child: const Text(
-                                  'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT',
+                                child: const Text('''
+Scripts:
+First day of school. Very, very exciting.
+I was up late last night figuring out a new plan
+Here it is:
+Fear! I need a list of all the possible negative outcomes on the first day at a new school.
+
+Tips:
+1. Bright and upbeat tone: Adopt a cheerful and lively vocal tone to convey happiness, radiating positivity and enthusiasm.
+2. Increased pace: Speak at a slightly faster pace, reflecting the energy and excitement associated with happiness.
+3. Higher pitch: Raise your pitch slightly to evoke a sense of joy and elation, conveying a light-hearted and optimistic tone.
+4. Energetic intonations: Infuse your voice with lively and energetic intonations, expressing the exuberance and zest that accompanies happiness.
+''',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
