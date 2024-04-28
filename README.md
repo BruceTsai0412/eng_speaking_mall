@@ -28,11 +28,11 @@ To get started with the Language Learning App, follow these steps:
 This project is currently being developed by a single individual and is not open to external contributions at this time. As such, there is no specific process for contributing to the project.
 
 ## Acknowledgments
-I would like to express my sincere gratitude to my project supervisor, Dr. Lai Yik Po, for their invaluable support and guidance throughout the development of this project. Their expertise, insightful feedback, and encouragement have been instrumental in shaping the project and ensuring its success.
+I would like to express my sincere gratitude to my project supervisor, Dr. Lai Yik Po, for his invaluable support and guidance throughout the development of this project. His expertise, insightful feedback, and encouragement have been instrumental in shaping the project and ensuring its success.
 
-Dr. Lai provided valuable mentorship and direction, offering valuable insights and suggestions that significantly enhanced the project's quality. Their unwavering support and availability for discussions and consultations were crucial in overcoming challenges and making informed decisions.
+Dr. Lai provided valuable mentorship and direction, offering valuable insights and suggestions that significantly enhanced the project's quality. His unwavering support and availability for discussions and consultations were crucial in overcoming challenges and making informed decisions.
 
-I am grateful for their dedication and commitment to my academic and professional growth. Their expertise in  Linguistics and Modern Language Studies has been a constant source of inspiration, motivating me to strive for excellence in this project.
+I am grateful for his dedication and commitment to my academic and professional growth. His expertise in  Linguistics and Modern Language Studies has been a constant source of inspiration, motivating me to strive for excellence in this project.
 
 I would also like to extend my appreciation to the faculty and staff of EduHK for providing the necessary resources and environment for conducting this research and development work.
 
